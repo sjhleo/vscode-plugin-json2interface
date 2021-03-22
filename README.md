@@ -1,0 +1,2 @@
+# vscode-plugin-json2class
+json转换成typescript的class的vscode插件
