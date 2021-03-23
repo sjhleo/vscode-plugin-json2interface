@@ -12,7 +12,9 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:jsonToTs.fromClipboard"
+        "onCommand:jsonToTs.fromSelection",
+        "onCommand:jsonToTs.fromClipboard",
+        "onCommand:jsonToTs.fromJSONFile"
     ],
     "main": "./lib/extension.js",
     "contributes": {
@@ -82,6 +84,7 @@
         "package": "npm run compile && vsce package"
     },
     "dependencies": {
+        "lodash": "4.17.21",
         "@types/lodash": "^4.14.155",
         "copy-paste": "^1.3.0",
         "humps": "^2.0.1",
