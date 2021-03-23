@@ -1,0 +1,104 @@
+{
+    "name": "vscode-plugin-json2class",
+    "displayName": "vscode-plugin-json2class",
+    "description": "vscode-plugin-json2class",
+    "version": "0.0.1",
+    "publisher": "leo",
+    "icon": "icon.png",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:jsonToTs.fromClipboard"
+    ],
+    "main": "./lib/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "jsonToTs.fromSelection",
+                "title": "选择json字符串转换ts",
+                "category": "Transform JSON"
+            },
+            {
+                "command": "jsonToTs.fromClipboard",
+                "title": "剪切板转换ts",
+                "category": "Transform JSON"
+            },
+            {
+                "command": "jsonToTs.fromJSONFile",
+                "title": "json文件转换成ts",
+                "category": "Transform JSON"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "jsonToTs.fromClipboard",
+                "key": "ctrl+alt+C"
+            },
+            {
+                "command": "jsonToTs.fromSelection",
+                "key": "ctrl+alt+S"
+            },
+            {
+                "command": "jsonToTs.fromJSONFile",
+                "key": "ctrl+alt+F"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "editorFocus",
+                    "command": "jsonToTs.fromSelection",
+                    "group": "Transform JSON"
+                },
+                {
+                    "when": "editorFocus",
+                    "command": "jsonToTs.fromClipboard",
+                    "group": "Transform JSON"
+                },
+                {
+                    "when": "editorFocus",
+                    "command": "jsonToTs.fromJSONFile",
+                    "group": "Transform JSON"
+                }
+            ]
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sjhleo/vscode-plugin-json2class.git"
+    },
+    "author": "https://github.com/sjhleo",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js",
+        "package": "npm run compile && vsce package"
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.155",
+        "copy-paste": "^1.3.0",
+        "humps": "^2.0.1",
+        "json-to-ts": "^1.7.0"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.54.0",
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.11.7",
+        "eslint": "^7.19.0",
+        "@typescript-eslint/eslint-plugin": "^4.14.1",
+        "@typescript-eslint/parser": "^4.14.1",
+        "glob": "^7.1.6",
+        "mocha": "^8.2.1",
+        "typescript": "^4.1.3",
+        "vscode-test": "^1.5.0",
+        "@types/copy-paste": "^1.1.30"
+    }
+}
