@@ -1,10 +1,11 @@
 {
-    "name": "vscode-plugin-json2class",
-    "displayName": "vscode-plugin-json2class",
-    "description": "vscode-plugin-json2class",
-    "version": "0.0.1",
-    "publisher": "leo",
+    "name": "vscode-plugin-json2interface",
+    "displayName": "vscode-plugin-json2interface",
+    "description": "json to ts interface",
+    "version": "0.0.2",
+    "publisher": "sjhleo",
     "icon": "icon.png",
+    "keywords": ["json", "type", "typescript", "tool"],
     "engines": {
         "vscode": "^1.54.0"
     },
@@ -117,7 +118,8 @@
         "pretest": "npm run compile && npm run lint",
         "lint": "eslint src --ext ts",
         "test": "node ./out/test/runTest.js",
-        "package": "npm run compile && vsce package"
+        "package": "npm run compile && vsce package",
+        "publish": "vsce publish"
     },
     "dependencies": {
         "lodash": "4.17.21",
