@@ -67,6 +67,42 @@
                     "group": "Transform JSON"
                 }
             ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "json2interface configuration",
+            "properties": {
+                "json2interface.prefix": {
+                    "type": "string",
+                    "default": "",
+                    "description": "生成接口的默认前缀"
+                },
+                "json2interface.name": {
+                    "type": "string",
+                    "default": "RootName",
+                    "description": "生成接口的默认名字"
+                },
+                "json2interface.humps": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否将key使用humps进行驼峰处理,a_b => aB,设置后 disallowComments配置失效,转换的结果都不会带有注释"
+                },
+                "json2interface.addExport": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否添加export"
+                },
+                "json2interface.disallowComments": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否禁用注释"
+                },
+                "json2interface.singleLineJsDocComments": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "单行注释"
+                }
+            }
         }
     },
     "repository": {
@@ -87,7 +123,7 @@
         "lodash": "4.17.21",
         "copy-paste": "^1.3.0",
         "humps": "^2.0.1",
-        "json-to-ts": "^1.7.0"
+        "typeof-jsonc": "^1.1.10"
     },
     "devDependencies": {
         "@types/lodash": "^4.14.155",

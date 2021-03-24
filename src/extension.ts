@@ -2,11 +2,10 @@ import * as path from "path";
 import * as os from "os";
 import * as fs from "fs";
 import { Uri, ExtensionContext, commands, window } from "vscode";
-import JsonToTS from "json-to-ts";
 import {
     handleError,
     getClipboardText,
-    parseJson,
+    generateInterface,
     pasteToMarker,
     getSelectedText,
     getViewColumn,
@@ -38,10 +37,7 @@ function transformFromSelection() {
 
     getSelectedText()
         .then(validateLength)
-        .then(parseJson)
-        .then(json => {
-            return JsonToTS(json).reduce((a, b) => `${a}\n\n${b}`);
-        })
+        .then(generateInterface)
         .then(interfaces => {
             fs.writeFileSync(tmpFilePath, interfaces);
         })
@@ -60,10 +56,7 @@ function transformFromJSONFile() {
     );
     const tmpFileUri = Uri.file(tmpFilePath);
     getSelectedFile()
-        .then(parseJson)
-        .then(json => {
-            return JsonToTS(json).reduce((a, b) => `${a}\n\n${b}`);
-        })
+        .then(generateInterface)
         .then(interfaces => {
             fs.writeFileSync(tmpFilePath, interfaces);
         })
@@ -76,10 +69,7 @@ function transformFromJSONFile() {
 function transformFromClipboard() {
     getClipboardText()
         .then(validateLength)
-        .then(parseJson)
-        .then(json => {
-            return JsonToTS(json).reduce((a, b) => `${a}\n\n${b}`);
-        })
+        .then(generateInterface)
         .then(interfaces => {
             pasteToMarker(interfaces);
         })

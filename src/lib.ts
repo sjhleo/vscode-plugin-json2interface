@@ -1,9 +1,9 @@
-import { ViewColumn, window, Range, Position } from "vscode";
+import { ViewColumn, window, workspace } from "vscode";
 import * as copyPaste from "copy-paste";
-import _  from "lodash";
-import  fs  from "fs";
+import _ from "lodash";
+import fs from "fs";
 const humps = require("humps");
-
+import { typeofJsonc } from "typeof-jsonc";
 export function getClipboardText() {
     try {
         return Promise.resolve(copyPaste.paste());
@@ -16,20 +16,25 @@ export function handleError(error: Error) {
     window.showErrorMessage(error.message);
 }
 
-export function parseJson(json: string): Promise<object> {
-    const tryEval = (str: any) => eval(`const a = ${str}; a`);
-
+export function generateInterface(json: string): Promise<string> {
+    let tryEval = (str: any) => eval(`const a = ${str}; a`);
+    let config = workspace.getConfiguration("json2interface");
     try {
-        return Promise.resolve(humps.camelizeKeys(JSON.parse(json)));
-    } catch (ignored) {}
-
-    try {
-        return Promise.resolve(tryEval(json));
+        if (config.get("humps")) {
+            json = JSON.stringify(humps.camelizeKeys(tryEval(json)));
+        }
+        return Promise.resolve(
+            typeofJsonc(json, config.get("name"), {
+                prefix: config.get("prefix"),
+                disallowComments: config.get("disallowComments"),
+                addExport: config.get("addExport"),
+                singleLineJsDocComments: config.get("singleLineJsDocComments")
+            })
+        );
     } catch (error) {
         return Promise.reject(new Error("JSON 格式 无效"));
     }
 }
-
 export function getViewColumn(): ViewColumn {
     const activeEditor = window.activeTextEditor;
     if (!activeEditor) {

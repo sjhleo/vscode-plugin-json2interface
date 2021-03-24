@@ -1,9 +1,3 @@
 # Change Log
 
-All notable changes to the "vscode-plugin-json2class" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+**2021-03-24** 添加转换配置
