@@ -1,11 +1,16 @@
 {
     "name": "vscode-plugin-json2interface",
     "displayName": "vscode-plugin-json2interface",
-    "description": "json to ts interface",
+    "description": "json to typescript interface",
     "version": "0.0.2",
     "publisher": "sjhleo",
     "icon": "icon.png",
-    "keywords": ["json", "type", "typescript", "tool"],
+    "keywords": [
+        "json",
+        "type",
+        "typescript",
+        "tool"
+    ],
     "engines": {
         "vscode": "^1.54.0"
     },
@@ -13,40 +18,40 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:jsonToTs.fromSelection",
-        "onCommand:jsonToTs.fromClipboard",
-        "onCommand:jsonToTs.fromJSONFile"
+        "onCommand:json2Ts.fromSelection",
+        "onCommand:json2Ts.fromClipboard",
+        "onCommand:json2Ts.fromFile"
     ],
-    "main": "./lib/extension.js",
+    "main": "./dist/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "jsonToTs.fromSelection",
+                "command": "json2Ts.fromSelection",
                 "title": "选择json字符串转换ts",
                 "category": "Transform JSON"
             },
             {
-                "command": "jsonToTs.fromClipboard",
+                "command": "json2Ts.fromClipboard",
                 "title": "剪切板转换ts",
                 "category": "Transform JSON"
             },
             {
-                "command": "jsonToTs.fromJSONFile",
+                "command": "json2Ts.fromFile",
                 "title": "json文件转换成ts",
                 "category": "Transform JSON"
             }
         ],
         "keybindings": [
             {
-                "command": "jsonToTs.fromClipboard",
+                "command": "json2Ts.fromClipboard",
                 "key": "ctrl+alt+C"
             },
             {
-                "command": "jsonToTs.fromSelection",
+                "command": "json2Ts.fromSelection",
                 "key": "ctrl+alt+S"
             },
             {
-                "command": "jsonToTs.fromJSONFile",
+                "command": "json2Ts.fromFile",
                 "key": "ctrl+alt+F"
             }
         ],
@@ -54,17 +59,17 @@
             "editor/context": [
                 {
                     "when": "editorFocus",
-                    "command": "jsonToTs.fromSelection",
+                    "command": "json2Ts.fromSelection",
                     "group": "Transform JSON"
                 },
                 {
                     "when": "editorFocus",
-                    "command": "jsonToTs.fromClipboard",
+                    "command": "json2Ts.fromClipboard",
                     "group": "Transform JSON"
                 },
                 {
                     "when": "editorFocus",
-                    "command": "jsonToTs.fromJSONFile",
+                    "command": "json2Ts.fromFile",
                     "group": "Transform JSON"
                 }
             ]

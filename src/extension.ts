@@ -11,28 +11,28 @@ import {
     getViewColumn,
     validateLength,
     getSelectedFile
-} from "./lib";
+} from "./util";
 
 export function activate(context: ExtensionContext) {
     context.subscriptions.push(
         commands.registerCommand(
-            "jsonToTs.fromSelection",
+            "json2Ts.fromSelection",
             transformFromSelection
         )
     );
     context.subscriptions.push(
         commands.registerCommand(
-            "jsonToTs.fromClipboard",
+            "json2Ts.fromClipboard",
             transformFromClipboard
         )
     );
     context.subscriptions.push(
-        commands.registerCommand("jsonToTs.fromJSONFile", transformFromJSONFile)
+        commands.registerCommand("json2Ts.fromFile", transformFromJSONFile)
     );
 }
 
 function transformFromSelection() {
-    const tmpFilePath = path.join(os.tmpdir(), "json-to-ts.ts");
+    const tmpFilePath = path.join(os.tmpdir(), "type.ts");
     const tmpFileUri = Uri.file(tmpFilePath);
 
     getSelectedText()
@@ -52,7 +52,7 @@ function transformFromJSONFile() {
     const filePath = activeFile?.substring(0, activeFile?.lastIndexOf("/"));
     const tmpFilePath = path.join(
         filePath ? filePath : os.tmpdir(),
-        "json-to-ts.ts"
+        "type.ts"
     );
     const tmpFileUri = Uri.file(tmpFilePath);
     getSelectedFile()
